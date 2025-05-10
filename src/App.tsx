@@ -155,23 +155,6 @@ export const App: React.FC = () => {
           </footer>
         )}
       </div>
-
-      <div
-        data-cy="ErrorNotification"
-        className="notification is-danger is-light has-text-weight-normal"
-      >
-        <button type="button" className="delete" data-cy="HideErrorButton" />
-        {/* show only one message at a time */}
-        Unable to load todos
-        <br />
-        Title should not be empty
-        <br />
-        Unable to add a todo
-        <br />
-        Unable to delete a todo
-        <br />
-        Unable to update a todo
-      </div>
     </div>
   );
 };
