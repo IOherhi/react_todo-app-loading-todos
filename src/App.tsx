@@ -7,7 +7,6 @@ import { TodoList } from './components/TodoList';
 import { Footer } from './components/Footer';
 import { MessageError } from './components/MessageError';
 
-
 /* Import componenst */
 
 import React, { useEffect, useState } from 'react';
@@ -18,6 +17,11 @@ export const App: React.FC = () => {
   const [hasError, setHasError] = useState(false);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+
+  const [theError, setTheError] = useState<string>('');
+
+
+
 
   const visibleTodos = todos.filter(todo => {
     if (filter === 'active') {
@@ -37,8 +41,18 @@ export const App: React.FC = () => {
         setTodos(response);
       })
       .catch(() => {
-        setHasError(true)
-      })
+        setHasError(true);
+        setTheError("Unable to load todos")
+
+
+        setTimeout(() => {
+          setHasError(false);
+        }, 3000)
+      });
+
+
+    return () => clearTimeout(timer)
+
   }, []);
 
   return (
@@ -48,14 +62,12 @@ export const App: React.FC = () => {
       <div className="todoapp__content">
         <Header />
 
-        <TodoList todos={todos} visibleTodos={visibleTodos}/>
+        <TodoList todos={todos} visibleTodos={visibleTodos} />
 
-        <Footer setFilter={setFilter} filter={filter} todos={todos}/>
-
+        <Footer setFilter={setFilter} filter={filter} todos={todos} />
       </div>
 
-        {hasError && <MessageError />}
-
-      </div>
-    );
+      {hasError && <MessageError setHasError={setHasError} theError={theError} />}
+    </div>
+  );
 };
