@@ -32,6 +32,8 @@ export const App: React.FC = () => {
     return true;
   });
 
+  
+
   useEffect(() => {
     getTodos(2881)
       .then(response => {
@@ -61,7 +63,11 @@ export const App: React.FC = () => {
         <Footer setFilter={setFilter} filter={filter} todos={todos} />
       </div>
 
-      <MessageError setHasError={setHasError} hasError={hasError} theError={theError} />
+      <MessageError
+        setHasError={setHasError}
+        hasError={hasError}
+        theError={theError}
+      />
     </div>
   );
 };
