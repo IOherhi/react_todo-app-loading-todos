@@ -20,9 +20,6 @@ export const App: React.FC = () => {
 
   const [theError, setTheError] = useState<string>('');
 
-
-
-
   const visibleTodos = todos.filter(todo => {
     if (filter === 'active') {
       return !todo.completed;
@@ -42,17 +39,14 @@ export const App: React.FC = () => {
       })
       .catch(() => {
         setHasError(true);
-        setTheError("Unable to load todos")
-
+        setTheError('Unable to load todos');
 
         setTimeout(() => {
           setHasError(false);
-        }, 3000)
+        }, 3000);
       });
 
-
-    return () => clearTimeout(timer)
-
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -67,7 +61,7 @@ export const App: React.FC = () => {
         <Footer setFilter={setFilter} filter={filter} todos={todos} />
       </div>
 
-      {hasError && <MessageError setHasError={setHasError} theError={theError} />}
+      <MessageError setHasError={setHasError} hasError={hasError} theError={theError} />
     </div>
   );
 };
