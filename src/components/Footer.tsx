@@ -5,7 +5,7 @@ import { Todo } from '../types/Todo';
 type Props = {
   filter: string;
   todos: Todo[];
-  setFilter: (P: string) => void;
+  setFilter: (filter: string) => void;
 };
 
 export const Footer: React.FC<Props> = ({ filter, setFilter, todos }) => {

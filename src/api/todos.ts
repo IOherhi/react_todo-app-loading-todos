@@ -4,15 +4,3 @@ import { client } from '../utils/fetchClient';
 export const getTodos = (id: number) => {
   return client.get<Todo[]>(`/todos?userId=${id}`);
 };
-
-export const postTodos = (id: number, data: string) => {
-  return client.post<Todo[]>(`/todos?userId=${id}`, data);
-};
-
-export const patchTodos = (id: number, data: string) => {
-  return client.patch<Todo[]>(`/todos?userId=${id}`, data);
-};
-
-export const deleteTodos = (id: number) => {
-  return client.delete(`/todos?userId=${id}`);
-};

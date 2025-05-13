@@ -4,14 +4,14 @@ import React from 'react';
 
 export interface Props {
   todos: Todo[];
-  VisibleTodos: Todo[];
+  visibleTodos: Todo[];
 }
 
-export const TodoList: React.FC<Props> = ({ todos, VisibleTodos }) => {
+export const TodoList: React.FC<Props> = ({ todos, visibleTodos }) => {
   return (
     <section className="todoapp__main" data-cy="TodoList">
       {todos.length > 0 &&
-        VisibleTodos.map(todo => {
+        visibleTodos.map(todo => {
           return (
             <div
               key={todo.id}

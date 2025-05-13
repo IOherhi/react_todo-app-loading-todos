@@ -20,7 +20,7 @@ export const App: React.FC = () => {
 
   const [theError, setTheError] = useState<string>('');
 
-  const VisibleTodos = todos.filter(todo => {
+  const visibleTodos = todos.filter(todo => {
     if (filter === 'active') {
       return !todo.completed;
     }
@@ -33,6 +33,8 @@ export const App: React.FC = () => {
   });
 
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
     getTodos(2881)
       .then(response => {
         setTodos(response);
@@ -41,12 +43,16 @@ export const App: React.FC = () => {
         setHasError(true);
         setTheError('Unable to load todos');
 
-        setTimeout(() => {
+        timer = setTimeout(() => {
           setHasError(false);
         }, 3000);
       });
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
   }, []);
 
   return (
@@ -56,7 +62,7 @@ export const App: React.FC = () => {
       <div className="todoapp__content">
         <Header />
 
-        <TodoList todos={todos} VisibleTodos={VisibleTodos} />
+        <TodoList todos={todos} visibleTodos={visibleTodos} />
 
         <Footer setFilter={setFilter} filter={filter} todos={todos} />
       </div>
