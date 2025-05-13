@@ -32,8 +32,6 @@ export const App: React.FC = () => {
     return true;
   });
 
-  
-
   useEffect(() => {
     getTodos(2881)
       .then(response => {
