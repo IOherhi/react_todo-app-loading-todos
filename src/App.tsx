@@ -20,7 +20,7 @@ export const App: React.FC = () => {
 
   const [theError, setTheError] = useState<string>('');
 
-  const visibleTodos = todos.filter(todo => {
+  const VisibleTodos = todos.filter(todo => {
     if (filter === 'active') {
       return !todo.completed;
     }
@@ -56,7 +56,7 @@ export const App: React.FC = () => {
       <div className="todoapp__content">
         <Header />
 
-        <TodoList todos={todos} visibleTodos={visibleTodos} />
+        <TodoList todos={todos} VisibleTodos={VisibleTodos} />
 
         <Footer setFilter={setFilter} filter={filter} todos={todos} />
       </div>
