@@ -1,55 +1,53 @@
-import classNames from "classnames";
-import { Todo } from "../types/Todo";
-import React from "react";
+import classNames from 'classnames';
+import { Todo } from '../types/Todo';
+import React from 'react';
 
-
-export interface props {
-  todos: Todo[],
-  visibleTodos: Todo[],
+export interface Props {
+  todos: Todo[];
+  VisibleTodos: Todo[];
 }
 
-
-export const TodoList: React.FC<props> = ({todos, visibleTodos}) => {
+export const TodoList: React.FC<Props> = ({ todos, VisibleTodos }) => {
   return (
     <section className="todoapp__main" data-cy="TodoList">
       {todos.length > 0 &&
-          visibleTodos.map(todo => {
-            return (
-              <div
-                key={todo.id}
-                data-cy="Todo"
-                className={classNames('todo', {
-                  completed: todo.completed === true,
-                })}
+        VisibleTodos.map(todo => {
+          return (
+            <div
+              key={todo.id}
+              data-cy="Todo"
+              className={classNames('todo', {
+                completed: todo.completed === true,
+              })}
+            >
+              <label className="todo__status-label">
+                <input
+                  data-cy="TodoStatus"
+                  type="checkbox"
+                  className="todo__status"
+                  checked={todo.completed}
+                />
+              </label>
+
+              <span data-cy="TodoTitle" className="todo__title">
+                {todo.title}
+              </span>
+
+              <button
+                type="button"
+                className="todo__remove"
+                data-cy="TodoDelete"
               >
-                <label className="todo__status-label">
-                  <input
-                    data-cy="TodoStatus"
-                    type="checkbox"
-                    className="todo__status"
-                    checked={todo.completed}
-                  />
-                </label>
+                ×
+              </button>
 
-                <span data-cy="TodoTitle" className="todo__title">
-                  {todo.title}
-                </span>
-
-                <button
-                  type="button"
-                  className="todo__remove"
-                  data-cy="TodoDelete"
-                >
-                  ×
-                </button>
-
-                <div data-cy="TodoLoader" className="modal overlay">
-                  <div className="modal-background has-background-white-ter" />
-                  <div className="loader" />
-                </div>
+              <div data-cy="TodoLoader" className="modal overlay">
+                <div className="modal-background has-background-white-ter" />
+                <div className="loader" />
               </div>
-            );
-          })}
-        </section>
+            </div>
+          );
+        })}
+    </section>
   );
-}
+};
